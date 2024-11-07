@@ -1,0 +1,51 @@
+@import '../../global.scss';  
+
+.log-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: $white-color;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    
+  
+    &__date {
+      font-size: 15px;
+      color: $text-color;
+      font:$poppins-regular;
+      margin-right: 10px;
+    }
+  
+    &__name {
+      font-size: 15px;
+      font:$poppins-medium;
+      color: $text-color;
+      margin-right: auto;
+    }
+   
+    &__edit {
+      background-color: $blue-color;
+      border: none;
+      border-radius: 5px;
+      padding: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: $blue-hover; 
+      }
+  
+      &:active {
+        background-color: $blue-hover;
+      }
+
+      .log-item__icon{
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+  
