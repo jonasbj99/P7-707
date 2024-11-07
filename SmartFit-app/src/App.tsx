@@ -1,8 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
 import './global.scss'; 
 import Button from './components/Button/Button';
+import WorkoutIcon from './assets/Workout-icon.svg';
+import PlayIcon  from './assets/Play-icon.svg';
 
 function App() {
   const handleButtonClick = () => {
@@ -25,11 +26,9 @@ function App() {
           Learn React
         </a>
         <div>
-      {/* Button with icon */}
-      <Button label="Start recording" onClick={handleButtonClick} />
+      <Button label="Start recording" onClick={handleButtonClick} variant="blue" icon={WorkoutIcon}/>
       
-      {/* Button without icon */}
-      <Button label="Stop recording" onClick={() => console.log("Stop clicked!")} />
+      <Button label="Stop recording" onClick={() => console.log("Stop clicked!")}   variant="orange"  icon={PlayIcon} />
     </div>
       </header>
     </div>
