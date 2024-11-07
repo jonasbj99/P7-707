@@ -5,15 +5,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family:$font-family-poppins;
     color: $text-color;
     
     h1 {
-    font: $poppins-bold;
+    font-weight: 700;
     margin: 0.5em 0;
     }
   
     p {
-    font: $poppins-regular;
+    font-weight: 400;
     font-size: 15px;
     margin: 0.5em 0;
     }
