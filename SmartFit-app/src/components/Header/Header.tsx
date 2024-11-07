@@ -7,7 +7,7 @@ type HeaderProps = {
   headerHeight?: string; 
 };
 
-function Header({ title, paragraph, headerHeight = 'auto'  }: HeaderProps) {
+function Header({ title, paragraph, headerHeight = 'auto'}: HeaderProps) {
   return (
     <div className={styles.headerContainer}>
        <h1 style={{ height: headerHeight }}>{title}</h1>
