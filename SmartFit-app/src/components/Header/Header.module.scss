@@ -1,0 +1,21 @@
+@import '../../global.scss'; 
+
+.headerParagraph {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family:$font-family-poppins;
+    color: $text-color;
+    
+    h1 {
+    font-weight: 700;
+    margin: 0.5em 0;
+    }
+  
+    p {
+    font-weight: 400;
+    font-size: 15px;
+    margin: 0.5em 0;
+    }
+  }
