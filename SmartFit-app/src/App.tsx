@@ -1,8 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Button from './components/Button/Button';
 
 function App() {
+  const handleButtonClick = () => {
+    console.log("Button clicked!");
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +23,13 @@ function App() {
         >
           Learn React
         </a>
+        <div>
+      {/* Button with icon */}
+      <Button label="Start recording" onClick={handleButtonClick} />
+      
+      {/* Button without icon */}
+      <Button label="Stop recording" onClick={() => console.log("Stop clicked!")} />
+    </div>
       </header>
     </div>
   );
