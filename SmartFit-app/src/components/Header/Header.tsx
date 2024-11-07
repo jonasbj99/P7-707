@@ -4,12 +4,13 @@ import styles from './Header.module.scss';
 type HeaderProps = {
   title?: string;
   paragraph?: string;
+  headerHeight?: string; 
 };
 
-function Header({ title, paragraph }: HeaderProps) {
+function Header({ title, paragraph, headerHeight = 'auto'  }: HeaderProps) {
   return (
-    <div>
-      <h1>{title}</h1>
+    <div className={styles.headerContainer}>
+       <h1 style={{ height: headerHeight }}>{title}</h1>
       <p>{paragraph}</p>
     </div>
   );
