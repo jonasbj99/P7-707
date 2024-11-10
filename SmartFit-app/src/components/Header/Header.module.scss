@@ -6,7 +6,7 @@
     justify-content: center;
     align-items: center;
     font-family:$font-family-poppins;
-    color: $text-color;
+    color: $dark-color;
     
     h1 {
     font-weight: 700;
@@ -19,3 +19,38 @@
     margin: 0.5em 0;
     }
   }
+
+   //variants for font header heights
+
+  .phoneL {
+    font-family:$font-family-poppins;
+    font-weight: 700;
+    font-size: 35px;
+  }
+
+  .phoneM {
+    font-family:$font-family-poppins;
+    font-weight: 700;
+    font-size: 30px;
+  }
+
+  .phoneS {
+    font-family:$font-family-poppins;
+    font-weight: 700;
+    font-size: 25px;
+
+  }
+
+  .desktopS {
+    font-family:$font-family-poppins;
+    font-weight: 700;
+    font-size: 60px;
+  }
+
+  .desktopM {
+    font-family:$font-family-poppins;
+    font-weight: 700;
+    font-size: 70px;
+  }
+
+  

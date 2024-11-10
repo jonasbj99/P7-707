@@ -4,6 +4,7 @@ import './global.scss';
 import Button from './components/Button/Button';
 import WorkoutIcon from './assets/Workout-icon.svg';
 import PlayIcon  from './assets/Play-icon.svg';
+import Header from './components/Header/Header';
 
 function App() {
   const handleButtonClick = () => {
