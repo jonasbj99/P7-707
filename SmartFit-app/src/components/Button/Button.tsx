@@ -5,13 +5,15 @@ type ButtonProps = {
   label: string;
   onClick: () => void;
   icon?: string;
-  variant: 'orange' | 'red' | 'blue' | 'dark'; 
+  variant: 'orange' | 'red' | 'blue' | 'dark' | 'outline'; 
+  size?: 'default' | 'small'; 
 }
 
-function Button ({ label, onClick, icon, variant = 'orange'  }: ButtonProps)
+function Button ({ label, onClick, icon, variant = 'orange', size = 'default'  }: ButtonProps)
 {
+  const buttonClass = `${styles.button} ${styles[variant]} ${size === 'small' ? styles.small : ''}`;
   return (
-    <button className={`${styles.button} ${styles[variant]}`}  onClick={onClick}>
+    <button className={buttonClass}  onClick={onClick}>
      {icon && <img src={icon} alt="Button icon" className={styles.icon} />}
      {label}
     </button>

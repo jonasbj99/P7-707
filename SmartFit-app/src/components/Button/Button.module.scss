@@ -49,6 +49,23 @@
     }
   }
   
+  .outline {
+    color: $blue-color;
+    background-color: $white-color;
+    border: 3px solid $blue-color; 
+  
+    &:hover {
+      background-color: $blue-hover;
+      color: $white-color;
+      border: none; 
+    }
+  }
+
+  .small {
+    margin-right: 15px;
+    font-size: 14px;
+  }
+
 
   .icon {
     margin-right: 10px;
@@ -61,6 +78,7 @@
       width: 321px;
       height: 70px;
       font-size: 20px; 
+      
       .icon {
         width: 27px;  
         height: 27px;
