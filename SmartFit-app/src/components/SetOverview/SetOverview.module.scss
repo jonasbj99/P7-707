@@ -20,26 +20,27 @@
     }
   
 .SetOverview_label {
-    font-weight: bold;
-    color: #ffffff;
+    font-weight: 700;
+    color: $white-color;
     background-color: $blue-color;  
     padding: 12px 30px;     
     border-radius: 7px;         
-    font-size: 0.9rem;           
+    font-size: 15px;           
     min-width: 60px;             
     }
  .SetOverview_labelReps{
-    font-weight: bold;
-    color: #ffffff;
+    font-weight: 600;
+    color: $white-color;
     background-color: $blue-color;  
     padding: 12px 42px;     
     border-radius: 7px;         
-    font-size: 0.9rem;           
+    font-size: 15px;           
     min-width: 60px;      
  }
 .SetOverview_value {
       color: $dark-color;
       margin-right: 20px;
+      font-weight: 500;
     }
   
 .SetOverview_note {
@@ -52,7 +53,7 @@
       color: $dark-color;
       background-color: $white-color;
       font-style: italic;
-      font-size: 0.9rem;
+      font-size: 15px;
     }
   
   
