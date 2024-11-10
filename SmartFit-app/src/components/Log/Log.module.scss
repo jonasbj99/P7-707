@@ -14,7 +14,7 @@
       font-size: 15px;
       color: $dark-color;
       font-weight:400;
-      margin-right: 40px;
+      margin-right: 50px;
     }  
 
     .logItem__name {
@@ -44,9 +44,26 @@
       }
 
       .log-item__icon{
-        width: 15px;
-        height: 15px;
+        width: 13px;
+        height: 13px;
       }
     }
   
+    @media (min-width: 1024px) {
+      
+        .log-item__icon {
+          width: 25px;  
+          height: 25px;
+        }
+
+        .logItem__date {
+          margin-right: 200px;
+          font-size: 17px;
+        }  
+      
+        .logItem__name{
+          font-size: 17px;
+        }
+    }
+    
   
