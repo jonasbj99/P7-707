@@ -1,7 +1,7 @@
 
 import React from 'react';
 import styles from './Log.module.scss';
-import editIcon from '../assets/edit-icon.svg'
+import editIcon from '../../assets/Edit-icon.svg';
 
 interface LogProps {
   date: string;

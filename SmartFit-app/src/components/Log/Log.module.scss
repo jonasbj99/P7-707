@@ -1,6 +1,6 @@
 @import '../../global.scss';  
 
-.log-item {
+.logItem {
     display: flex;
     align-items: center;
     padding: 10px 15px;
@@ -8,27 +8,27 @@
     border-radius: 10px;
     font-family:$font-family-poppins;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    
+   } 
   
-    &__date {
+   .logItem__date {
       font-size: 15px;
-      color: $text-color;
+      color: $dark-color;
       font-weight:400;
-      margin-right: 10px;
-    }
-  
-    &__name {
+      margin-right: 40px;
+    }  
+
+    .logItem__name {
       font-size: 15px;
       font-weight: 500;
-      color: $text-color;
+      color: $dark-color;
       margin-right: auto;
     }
    
-    &__edit {
+    .logItem__edit {
       background-color: $blue-color;
       border: none;
       border-radius: 5px;
-      padding: 8px;
+      padding: 5px;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -44,9 +44,9 @@
       }
 
       .log-item__icon{
-        width: 16px;
-        height: 16px;
+        width: 15px;
+        height: 15px;
       }
     }
-  }
+  
   

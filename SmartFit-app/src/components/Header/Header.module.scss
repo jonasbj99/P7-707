@@ -7,18 +7,19 @@
     align-items: center;
     font-family:$font-family-poppins;
     color: $dark-color;
+}
     
-    h1 {
+.titleheader{
     font-weight: 700;
     margin: 0.5em 0;
     }
   
-    p {
+.p {
     font-weight: 400;
     font-size: 15px;
     margin: 0.5em 0;
     }
-  }
+  
 
    //variants for font header heights
 
