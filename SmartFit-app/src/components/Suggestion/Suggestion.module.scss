@@ -1,0 +1,19 @@
+@import '../../global.scss';  
+
+.SuggestionBox {
+    background-color: $white-color;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-top: 20px;
+    max-width: 300px;
+    font-family: $font-family-poppins;
+    font-size: 14px;
+    text-align: center;
+    color: $dark-color;}
+  
+.suggestionText {
+      margin: 0;
+    }
+  
+  
