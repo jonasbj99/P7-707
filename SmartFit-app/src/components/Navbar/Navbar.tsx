@@ -18,7 +18,7 @@ function Navbar({ logoImg, logoAlt }: NavbarProps) {
   return (
     <header className={styles.navbar}>
       <div className={styles.logo}>
-        <Link to="/">
+        <Link to="/home">
           <img src={logoImg} alt={logoAlt} className={styles.logoImage} />
         </Link>
       </div>
@@ -33,7 +33,16 @@ function Navbar({ logoImg, logoAlt }: NavbarProps) {
       {/*Menu links*/}
       <nav className={`${styles.navLinks} ${menuOpen ? styles.menuOpen : ''}`}>
         <Link to="/login">
-          <img src={loginIcon} alt="Login Icon" className={styles.icon} /> Login
+          <img src={loginIcon} alt="Login Icon" className={styles.icon} /> Start workout
+        </Link>
+        <Link to="/login">
+          <img src={loginIcon} alt="Login Icon" className={styles.icon} /> Logs
+        </Link>
+        <Link to="/login">
+          <img src={loginIcon} alt="Login Icon" className={styles.icon} /> Profile
+        </Link>
+        <Link to="/login" className={styles.logoutButton}>
+          <img src={loginIcon} alt="Login Icon" className={styles.icon} /> Log out
         </Link>
       </nav>
     </header>

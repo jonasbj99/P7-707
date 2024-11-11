@@ -1,57 +1,59 @@
-@import '../../global.scss'; 
+@import '../../global.scss';
+
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .headerParagraph {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-family:$font-family-poppins;
-    color: $dark-color;
+  font-family: $font-family-poppins;
+  color: $dark-color;
+  font-size: 15px;
+  width: 300px;
+  text-align: center;
 }
-    
-.titleheader{
-    font-weight: 700;
-    margin: 0.5em 0;
-    }
-  
-.p {
-    font-weight: 400;
-    font-size: 15px;
-    margin: 0.5em 0;
-    }
-  
 
-   //variants for font header heights
+.titleHeader {
+  font-weight: 700;
+  margin: 0.5em 0;
+  text-transform: uppercase;
+}
 
-  .phoneL {
-    font-family:$font-family-poppins;
-    font-weight: 700;
-    font-size: 35px;
+.phoneL {
+  font-family: $font-family-poppins;
+  font-weight: 700;
+  font-size: 35px;
+}
+
+.phoneM {
+  font-family: $font-family-poppins;
+  font-weight: 700;
+  font-size: 30px;
+}
+
+.phoneS {
+  font-family: $font-family-poppins;
+  font-weight: 700;
+  font-size: 25px;
+}
+
+@media (min-width: 1024px) {
+  .phoneS {
+    font-size: 60px; 
   }
 
   .phoneM {
-    font-family:$font-family-poppins;
-    font-weight: 700;
-    font-size: 30px;
+    font-size: 70px; 
   }
 
-  .phoneS {
-    font-family:$font-family-poppins;
-    font-weight: 700;
-    font-size: 25px;
-
+  .phoneL {
+    font-size: 70px; 
   }
 
-  .desktopS {
-    font-family:$font-family-poppins;
-    font-weight: 700;
-    font-size: 60px;
+  .headerParagraph {
+    font-size: 18px;
+    width: 450px;
   }
-
-  .desktopM {
-    font-family:$font-family-poppins;
-    font-weight: 700;
-    font-size: 70px;
-  }
-
-  
+}

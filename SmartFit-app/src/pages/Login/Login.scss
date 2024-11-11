@@ -1,0 +1,65 @@
+body {
+  display: block;
+  align-items: initial; 
+  justify-content: initial;
+}
+
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+
+  .logo {
+    width: 350px;
+    margin-bottom: 30px;
+  }
+
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 300px;
+    margin-top: 60px;
+  }
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    align-items: stretch;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+
+    .image-section {
+      flex: 1;
+      height: 100vh;
+      background-image: url('../../assets/Workout-image.svg');
+      background-size: auto;
+      background-repeat: no-repeat;
+      background-position: left center;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 0;
+    }
+
+    .login-section {
+      flex: 1;
+      padding: 2rem;
+      margin-right: 7rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo {
+      width: 320px;
+      margin-bottom: 0px;
+    }
+  }
+}

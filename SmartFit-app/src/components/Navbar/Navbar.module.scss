@@ -94,7 +94,20 @@
   color: $orange-color;
 }
 
-/* Desktop Menu */
+.logoutButton {
+  background-color: $orange-color;
+  color: $white-color;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 700;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background-color: $orange-hover;
+    color: $white-color !important;
+  }
+}
+
 @media (min-width: 1024px) {
   .burger {
     display: none;
@@ -102,11 +115,13 @@
 
   .navLinks {
     display: flex;
+    gap: 1rem; 
   }
 
   .navLinks a {
     padding: 0.5rem 1rem;
     font-size: 18px;
+    white-space: nowrap;
   }
 
   .menuOpen {
