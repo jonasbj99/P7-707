@@ -5,6 +5,8 @@ import Log from '../components/Log/Log';
 import LogOverview from '../components/LogOverview/LogOverview';
 import Suggestion from '../components/Suggestion/Suggestion';
 import SetOverview from '../components/SetOverview/SetOvervie';
+import ExerciseHeader from '../components/ExerciseHeader/ExerciseHeader';
+import ExerciseRow from '../components/ExerciseRow/ExerciseRow';
 
 const Login = () => {
   const handleLoginClick = () => {
@@ -28,9 +30,12 @@ const Login = () => {
      <LogOverview exercise={'SQUAT'} set={1} reps={5} weight={'55kg'} onEdit={function (): void {
         throw new Error('Function not implemented.');
       } }/>
-      <Suggestion message={'Nice set, try to go deeper next time or maybe do more quality stretching bla bla bla bla bla bla '}/>
 
-      <SetOverview exercise={'Squat'} reps={10} weight={55}/>
+      <ExerciseHeader onEdit={function (): void {
+        throw new Error('Function not implemented.');
+      } }/>
+
+      <ExerciseRow exercise={'Squat'} set={5} reps={7} weight={'50kg'} notes={'strech more'}/>
     </div>
   );
 };
