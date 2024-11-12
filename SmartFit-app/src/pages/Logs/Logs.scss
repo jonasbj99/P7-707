@@ -1,0 +1,41 @@
+.logs-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 105vh;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+  
+    .logs-section {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logs_overview{
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        width: 100%;
+        margin-top: 30px;
+    }
+  
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      width: 100%;
+      margin-top: 20px;
+  
+      @media (min-width: 768px) {
+        flex-direction: row;
+        justify-content: center;
+        gap: 100px;
+      }
+    }
+  }

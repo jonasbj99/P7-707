@@ -48,13 +48,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1.5rem;
+      padding: 35px;
       border: 1px solid $blue-color;
       border-radius: 8px;
       color: $dark-color;
       background-color: $white-color;
       font-style: italic;
       font-size: 15px;
+  
     }
   
     @media (min-width: 1024px) {
@@ -75,5 +76,6 @@
         .SetOverview_labelReps{
             font-size: 17px; 
         }
+
       }
       

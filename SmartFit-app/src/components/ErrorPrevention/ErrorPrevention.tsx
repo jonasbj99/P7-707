@@ -13,15 +13,15 @@ function ErrorPrevention({ text, type = 'error' }: ErrorPreventionProps) {
   const navigate = useNavigate();
 
   const handleHomeClick = () => { 
-    navigate('/');
+    navigate('/home');
   };
 
   const handleYesClick = () => {
-    navigate('/login');
+    navigate('/set');
   };
 
   const handleNoClick = () => {
-    navigate('/login');
+    navigate('/recording');
   };
 
   return (

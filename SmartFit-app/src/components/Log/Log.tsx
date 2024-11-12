@@ -1,20 +1,26 @@
-
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './Log.module.scss';
 import editIcon from '../../assets/Edit-icon.svg';
 
 interface LogProps {
   date: string;
   workoutName: string;
-  onEdit: () => void;
+  destination?: string; 
 }
 
-const Log = ({ date, workoutName, onEdit }: LogProps) => {
+const Log = ({ date, workoutName }: LogProps) => {
+  const navigate = useNavigate();
+
+  const handleNavigation = () => {
+    navigate('/singleworkout'); 
+  };
+
   return (
     <div className={styles.logItem}>
       <span className={styles.logItem__date}>{date}</span>
       <span className={styles.logItem__name}>{workoutName}</span>
-      <button className={styles.logItem__edit} onClick={onEdit}>
+      <button className={styles.logItem__edit} onClick={handleNavigation}>
         <img src={editIcon} alt="Edit" className={styles.logItem__icon} />
       </button>
     </div>
@@ -22,3 +28,4 @@ const Log = ({ date, workoutName, onEdit }: LogProps) => {
 };
 
 export default Log;
+

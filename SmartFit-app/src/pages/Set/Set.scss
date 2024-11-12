@@ -1,0 +1,33 @@
+.div-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 110vh;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+  
+    .setheader-section {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      width: 100%;
+      margin-top: 320px;
+  
+      @media (min-width: 768px) {
+        flex-direction: row;
+        justify-content: center;
+        gap: 100px;
+      }
+    }
+  }

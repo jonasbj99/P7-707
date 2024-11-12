@@ -14,7 +14,7 @@ const Home = () => {
   };
 
   const handleLogClick = () => {
-    navigate('/home');
+    navigate('/logs');
   };
 
   return (
@@ -36,7 +36,7 @@ const Home = () => {
           />
           <Button
             icon= {LogIcon}
-            label="Log"
+            label="Logs"
             onClick={handleLogClick}
             variant="blue"
           />
