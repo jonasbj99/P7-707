@@ -20,7 +20,7 @@ const Set = () => {
     };
   
     return (
-      <div className="div-page">  
+      <div className="set_div-page">  
         <div className="setheader-section">
           <Header
             variant={'phoneS'}
