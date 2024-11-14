@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import Header from '../../components/Header/Header';
 import logo from '../../assets/Logo.svg';
+import workoutImage from '../../assets/Workout-image.svg';
 import '../../pages/Login/Login.scss';
 
 const Login = () => {
@@ -14,8 +15,10 @@ const Login = () => {
 
   return (
     <div className="login-page">
-      <div className="image-section" ></div>
-  
+      <div className="image-section">
+        <img src={workoutImage} alt="Workout" className="background-image" />
+      </div>
+
       <div className="login-section">
         <img src={logo} alt="SMARTFIT Logo" className="logo" />
 
