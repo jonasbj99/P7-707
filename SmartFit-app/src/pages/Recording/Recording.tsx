@@ -5,20 +5,25 @@ import NoIcon from '../../assets/No-icon.svg';
 import Header from '../../components/Header/Header';
 import ErrorPrevention from '../../components/ErrorPrevention/ErrorPrevention';
 
-const Recording = () => {  const [showErrorPrevention, setShowErrorPrevention] = useState(false);
+const Recording = () => {  
+  const [showErrorPrevention, setShowErrorPrevention] = useState(false);
 
   const handleEndClick = () => {
     setShowErrorPrevention(true); 
   };
 
+  const handleCloseModal = () => {
+    setShowErrorPrevention(false); // Reset showErrorPrevention when the modal is closed
+  };
+
   return (
     <div className='recordingPage'>
       <Header
-          variant={'phoneM'}
-          title='Recording'
-        />
+        variant={'phoneM'}
+        title='Recording'
+      />
 
-      {/*Placeholder*/}
+      {/* Placeholder */}
       <div className='recordingArea'>
         <img 
           src="https://via.placeholder.com/600x300?text=Recording+in+Progress" 
@@ -28,16 +33,17 @@ const Recording = () => {  const [showErrorPrevention, setShowErrorPrevention] =
       </div>
 
       <Button
-            icon= {NoIcon}
-            label="End Recording"
-            onClick={handleEndClick}
-            variant="red"
-          />
+        icon={NoIcon}
+        label="End Recording"
+        onClick={handleEndClick}
+        variant="red"
+      />
 
       {showErrorPrevention && (
         <ErrorPrevention
           text="Are you sure you want to end the recording?"
           type="error"
+          onClose={handleCloseModal} 
         />
       )}
     </div>
@@ -45,4 +51,3 @@ const Recording = () => {  const [showErrorPrevention, setShowErrorPrevention] =
 };
 
 export default Recording;
-

@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 110vh;
+    height: 100vh;
     text-align: center;
     padding: 0;
     margin: 0;
@@ -11,6 +11,7 @@
     .setheader-section {
       flex: 1;
       padding: 2rem;
+      padding-top: 5em;
       display: flex;
       flex-direction: column;
       align-items: center;

@@ -1,41 +1,66 @@
 .workout-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 117vh;
-    text-align: center;
-    padding: 0;
-    margin: 0;
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+
+  .mobile-layout {
+    display: block;
+
     .overview-section {
       flex: 1;
       padding: 2rem;
+      padding-top: 7.5em;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
     }
 
-    .log_overview{
-        display: flex;
-        flex-direction: column;
-        gap: 13px;
-        width: 100%;
-        margin-top: 20px;
+    .log_overview {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      width: 100%;
+      margin-top: 20px;
     }
-  
+
     .buttonworkout-group {
       display: flex;
       flex-direction: column;
       gap: 13px;
       width: 100%;
       margin-top: 20px;
-  
-      @media (min-width: 768px) {
-        flex-direction: row;
-        justify-content: center;
-        gap: 100px;
-      }
     }
   }
+
+  .desktop-layout {
+    display: none;
+    width: 100%; 
+    padding: 2rem;
+    padding-top: 8em;
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-layout {
+      display: none; 
+    }
+
+    .desktop-layout {
+      display: block; 
+    }
+
+    .buttonworkout-group {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      width: 100%;
+      margin-top: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
