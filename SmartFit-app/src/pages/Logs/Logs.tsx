@@ -30,7 +30,7 @@ const Logs = () => {
             <Log date={'4.11.2024'} workoutName={'Workout 2'} />
             <Log date={'2.11.2024'} workoutName={'Workout 1'} />
 
-            <div className="button-group">
+            <div className="logs_button-group">
               <Button
                 label="Load More"
                 onClick={handleLoadMoreClick}

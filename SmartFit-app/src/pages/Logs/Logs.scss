@@ -7,35 +7,57 @@
     text-align: center;
     padding: 0;
     margin: 0;
+    width: 100%; // Ensure full width on desktop
   
     .logs-section {
-      flex: 1;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+        flex: 1;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%; // Take full width
+        max-width: 1200px; // Optional: limit width for better readability
     }
 
-    .logs_overview{
+    .logs_overview {
         display: flex;
         flex-direction: column;
         gap: 18px;
         width: 100%;
         margin-top: 30px;
+        align-items: center; // Center-align by default
     }
   
-    .button-group {
-      display: flex;
-      flex-direction: column;
-      gap: 13px;
-      width: 100%;
-      margin-top: 20px;
-  
-      @media (min-width: 768px) {
-        flex-direction: row;
-        justify-content: center;
-        gap: 100px;
-      }
+    .logs_button-group {
+        display: flex;
+        flex-direction: column;
+        gap: 13px;
+        width: 100%;
+        margin-top: 20px;
     }
-  }
+  
+    @media (min-width: 768px) {
+        align-items: flex-start; // Left-align on larger screens
+        text-align: left;
+        padding-left: 2rem; // Optional: add padding to move away from the edge
+
+        .logs-section {
+            align-items: flex-start; // Left-align content in logs-section
+            padding-left: 2rem; // Optional: add padding for better spacing
+        }
+
+        .logs_overview {
+            align-items: flex-start; // Left-align items in logs_overview
+            padding-left: 2rem; // Optional: add padding for better spacing
+        }
+
+        .logs_button-group {
+            flex-direction: row;
+            justify-content: flex-start; // Left-align buttons
+            gap: 100px;
+            align-items: flex-start;
+        }
+    }
+}
+
