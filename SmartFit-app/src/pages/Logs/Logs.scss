@@ -3,21 +3,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 105vh;
     text-align: center;
     padding: 0;
     margin: 0;
-    width: 100%; // Ensure full width on desktop
   
     .logs-section {
         flex: 1;
         padding: 2rem;
+        padding-top: 7.5em;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 100%; // Take full width
-        max-width: 1200px; // Optional: limit width for better readability
     }
 
     .logs_overview {
@@ -26,7 +23,8 @@
         gap: 18px;
         width: 100%;
         margin-top: 30px;
-        align-items: center; // Center-align by default
+        align-items: center; 
+        justify-content: center;
     }
   
     .logs_button-group {
@@ -37,7 +35,7 @@
         margin-top: 20px;
     }
   
-    @media (min-width: 768px) {
+    @media (min-width: 1024px) {
         align-items: flex-start; // Left-align on larger screens
         text-align: left;
         padding-left: 2rem; // Optional: add padding to move away from the edge
