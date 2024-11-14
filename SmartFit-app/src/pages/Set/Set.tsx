@@ -32,7 +32,7 @@ const Set = () => {
           <div className="set_overview">
           <SetOverview exercise={'Squat'} reps={10} weight={55}/>
 
-          <div className="button-group">
+          <div className="set_button-group">
             <Button
               icon= {PlayIcon}
               label="Start Recording"
