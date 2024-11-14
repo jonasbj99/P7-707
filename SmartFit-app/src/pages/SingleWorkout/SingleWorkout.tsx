@@ -13,7 +13,7 @@ return (
           title='WORKOUT 6'
         />
         
-         <div className="log_overview">
+         <div className="single_log_overview">
         <LogOverview exercise={'Squat'} set={1} reps={10} weight={'60kg'} onEdit={function (): void {
                     throw new Error('Function not implemented.');
                 } }/>
