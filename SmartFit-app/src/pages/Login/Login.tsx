@@ -7,14 +7,14 @@ import '../../pages/Login/Login.scss';
 import ErrorPrevention from '../../components/ErrorPrevention/ErrorPrevention';
 
 const Login = () => {
-  const [showSuccessModal, setShowSuccessModal] = useState(false); // Track success modal visibility
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const handleLoginClick = () => {
-    setShowSuccessModal(true); // Show the success modal when the login button is clicked
+    setShowSuccessModal(true);
   };
 
   const handleCloseModal = () => {
-    setShowSuccessModal(false); // Hide the modal
+    setShowSuccessModal(false);
   };
 
   return (
@@ -43,12 +43,11 @@ const Login = () => {
         </div>
       </div>
 
-      {/* Success Modal */}
       {showSuccessModal && (
         <ErrorPrevention
           text="Logged successfully!"
           type="success"
-          onClose={handleCloseModal} // Close modal when action is taken
+          onClose={handleCloseModal}
         />
       )}
     </div>
