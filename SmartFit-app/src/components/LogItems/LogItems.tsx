@@ -2,6 +2,7 @@ import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import styles from './LogItems.module.scss';
 import editIcon from '../../assets/Edit-icon.svg'; // Import the icon
+import Header from '../Header/Header';
 
 interface WorkoutItem {
   exercise: string;
@@ -20,7 +21,10 @@ function LogItems({ workoutData }: LogItemsProps) {
 
   return (
     <div className={styles.workoutOverview}>
-      <h2 className={styles.heading}>Workout Overview</h2>
+      <Header
+         variant={'phoneM'}
+         title='Workout Overview'
+        />
 
       <div className={styles.workoutTable}>
         {isDesktop ? (

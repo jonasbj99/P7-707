@@ -8,7 +8,6 @@ import Recording from './pages/Recording/Recording';
 import Login from './pages/Login/Login';
 import Set from './pages/Set/Set';
 import WorkoutOverview from './pages/WorkoutOverview/WorkoutOverview';
-import SingleWorkout from './pages/SingleWorkout/SingleWorkout';
 import Logs from './pages/Logs/Logs';
 
 function App() {
@@ -29,7 +28,6 @@ function App() {
         <Route path="/recording" element={<Recording />} />
         <Route path="/set" element={<Set />} />
         <Route path="/workoutoverview" element={<WorkoutOverview workoutData={workoutData} />} />
-        <Route path="/singleworkout" element={<SingleWorkout />} />
         <Route path="/logs" element={<Logs />} />
       </Routes>
     </Router>

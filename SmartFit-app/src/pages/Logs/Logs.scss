@@ -1,61 +1,63 @@
-.logs-page {
+.logs-container {
+    $font-family-poppins: "Poppins", sans-serif;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 0;
-    margin: 0;
-  
-    .logs-section {
-        flex: 1;
-        padding: 2rem;
-        padding-top: 7.5em;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .logs_overview {
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-        width: 100%;
-        margin-top: 30px;
-        align-items: center; 
-        justify-content: center;
-    }
-  
-    .logs_button-group {
-        display: flex;
-        flex-direction: column;
-        gap: 13px;
-        width: 100%;
-        margin-top: 20px;
-    }
+    padding-top: 4rem;
   
     @media (min-width: 1024px) {
-        align-items: flex-start;
-        text-align: left;
-        padding-left: 2rem;
-
-        .logs-section {
-            align-items: flex-start;
-            padding-left: 2rem;
-        }
-
-        .logs_overview {
-            align-items: flex-start;
-            padding-left: 2rem;
-        }
-
-        .logs_button-group {
-            flex-direction: row;
-            justify-content: flex-start;
-            gap: 100px;
-            align-items: flex-start;
-        }
+      flex-direction: row;
+      height: 100vh;
     }
-}
+  
+    .logs-section {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+      padding-bottom: 20px;
+  
+      @media (min-width: 1024px) {
+        flex: 0 0 400px;
+        max-width: 400px;
+        border-right: 1px solid #eaeaea;
+      }
 
+      .logs-header {
+        padding-bottom: 30px;
+      }
+  
+      .log-item-container {
+        margin-bottom: 1rem;
+        display: flex; 
+        flex-direction: column;
+        align-items: center;
+  
+        .mobile-overview {
+          margin-top: 1rem;
+          padding: 1rem;
+          background: #f9f9f9;
+          border-radius: 8px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          width: 100%;
+        }
+      }
+    }
+  
+    .workout-overview-section {
+      flex: 1;
+      padding: 2rem;
+  
+      @media (max-width: 1023px) {
+        display: none;
+      }
+  
+      .placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        font-size: 1rem;
+        color: #999;
+      }
+    }
+  }
+  

@@ -1,16 +1,20 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import Button from '../../components/Button/Button';
 import Header from '../../components/Header/Header';
 import logo from '../../assets/Logo.svg';
 import workoutImage from '../../assets/Workout-image.svg';
 import '../../pages/Login/Login.scss';
+import ErrorPrevention from '../../components/ErrorPrevention/ErrorPrevention';
 
 const Login = () => {
-  const navigate = useNavigate();
+  const [showSuccessModal, setShowSuccessModal] = useState(false); // Track success modal visibility
 
   const handleLoginClick = () => {
-    navigate('/home');
+    setShowSuccessModal(true); // Show the success modal when the login button is clicked
+  };
+
+  const handleCloseModal = () => {
+    setShowSuccessModal(false); // Hide the modal
   };
 
   return (
@@ -34,18 +38,19 @@ const Login = () => {
         />
 
         <div className="button-group">
-          <Button
-            label="Login"
-            onClick={handleLoginClick}
-            variant="blue"
-          />
-          <Button
-            label="Sign up"
-            onClick={handleLoginClick}
-            variant="dark"
-          />
+          <Button label="Login" onClick={handleLoginClick} variant="blue" />
+          <Button label="Sign up" onClick={handleLoginClick} variant="dark" />
         </div>
       </div>
+
+      {/* Success Modal */}
+      {showSuccessModal && (
+        <ErrorPrevention
+          text="Logged successfully!"
+          type="success"
+          onClose={handleCloseModal} // Close modal when action is taken
+        />
+      )}
     </div>
   );
 };
