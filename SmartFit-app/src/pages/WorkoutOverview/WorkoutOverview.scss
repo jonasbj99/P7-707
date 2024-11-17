@@ -1,66 +1,19 @@
-.workout-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0;
-  margin: 0;
+.workout-overview {
+  padding: 1rem;
+  font-family: Arial, sans-serif;
 
-  .mobile-layout {
-    display: block;
-
-    .overview-section {
-      flex: 1;
-      padding: 2rem;
-      padding-top: 7.5em;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .log_overview {
-      display: flex;
-      flex-direction: column;
-      gap: 13px;
-      width: 100%;
-      margin-top: 20px;
-    }
-
-    .buttonworkout-group {
-      display: flex;
-      flex-direction: column;
-      gap: 13px;
-      width: 100%;
-      margin-top: 20px;
-    }
+  h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
   }
 
-  .desktop-layout {
-    display: none;
-    width: 100%; 
-    padding: 2rem;
-    padding-top: 8em;
-  }
-
-  @media (min-width: 1024px) {
-    .mobile-layout {
-      display: none; 
-    }
-
-    .desktop-layout {
-      display: block; 
-    }
-
-    .buttonworkout-group {
-      display: flex;
-      flex-direction: column;
-      gap: 13px;
-      width: 100%;
-      margin-top: 20px;
-      align-items: center;
-      justify-content: center;
-    }
+  .button-wrapper {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
+

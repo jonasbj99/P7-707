@@ -10,7 +10,15 @@ import Set from './pages/Set/Set';
 import WorkoutOverview from './pages/WorkoutOverview/WorkoutOverview';
 import SingleWorkout from './pages/SingleWorkout/SingleWorkout';
 import Logs from './pages/Logs/Logs';
+
 function App() {
+  // Define workout data here
+  const workoutData = [
+    { exercise: "Squat", set: 1, reps: 10, weight: "40kg", notes: "" },
+    { exercise: "Squat", set: 1, reps: 8, weight: "50kg", notes: "" },
+    { exercise: "Deadlift", set: 1, reps: 10, weight: "60kg", notes: "Do more stretching" },
+  ];
+
   return (
     <Router>
       <Navbar logoImg={logoImg} logoAlt="Logo" />
@@ -20,7 +28,7 @@ function App() {
         <Route path="/current-workout" element={<CurrentWorkout />} />
         <Route path="/recording" element={<Recording />} />
         <Route path="/set" element={<Set />} />
-        <Route path="/workoutoverview" element={<WorkoutOverview />} />
+        <Route path="/workoutoverview" element={<WorkoutOverview workoutData={workoutData} />} />
         <Route path="/singleworkout" element={<SingleWorkout />} />
         <Route path="/logs" element={<Logs />} />
       </Routes>

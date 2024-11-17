@@ -36,23 +36,23 @@
     }
   
     @media (min-width: 1024px) {
-        align-items: flex-start; // Left-align on larger screens
+        align-items: flex-start;
         text-align: left;
-        padding-left: 2rem; // Optional: add padding to move away from the edge
+        padding-left: 2rem;
 
         .logs-section {
-            align-items: flex-start; // Left-align content in logs-section
-            padding-left: 2rem; // Optional: add padding for better spacing
+            align-items: flex-start;
+            padding-left: 2rem;
         }
 
         .logs_overview {
-            align-items: flex-start; // Left-align items in logs_overview
-            padding-left: 2rem; // Optional: add padding for better spacing
+            align-items: flex-start;
+            padding-left: 2rem;
         }
 
         .logs_button-group {
             flex-direction: row;
-            justify-content: flex-start; // Left-align buttons
+            justify-content: flex-start;
             gap: 100px;
             align-items: flex-start;
         }
