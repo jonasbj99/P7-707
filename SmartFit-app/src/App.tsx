@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import logoImg from './assets/Workout-icon.svg';
 import Home from './pages/Home/Home';
-import CurrentWorkout from './pages/CurrentWorkout/CurrentWorkout';
+import StartWorkout from './pages/StartWorkout/StartWorkout';
 import Recording from './pages/Recording/Recording';
 import Login from './pages/Login/Login';
 import Set from './pages/Set/Set';
@@ -24,7 +24,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/current-workout" element={<CurrentWorkout />} />
+        <Route path="/start-workout" element={<StartWorkout />} />
         <Route path="/recording" element={<Recording />} />
         <Route path="/set" element={<Set />} />
         <Route path="/workoutoverview" element={<WorkoutOverview workoutData={workoutData} />} />

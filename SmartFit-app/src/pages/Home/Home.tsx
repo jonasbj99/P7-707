@@ -10,7 +10,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleStartWorkoutClick = () => {
-    navigate('/current-workout');
+    navigate('/start-workout');
   };
 
   const handleLogClick = () => {

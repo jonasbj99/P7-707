@@ -2,11 +2,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import Header from '../../components/Header/Header';
-import '../../pages/Home/Home.scss';
+import '../../pages/StartWorkout/StartWorkout.scss';
 import PlayIcon from '../../assets/Play-icon.svg';
 import NoIcon from '../../assets/No-icon.svg';
 
-const CurrentWorkout = () => {
+const StartWorkout = () => {
   const navigate = useNavigate();
 
   const handleStartRecordingClick = () => {
@@ -46,4 +46,4 @@ const CurrentWorkout = () => {
   );
 };
 
-export default CurrentWorkout;
+export default StartWorkout;
