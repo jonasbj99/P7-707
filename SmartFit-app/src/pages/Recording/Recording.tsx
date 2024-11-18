@@ -4,6 +4,7 @@ import Button from '../../components/Button/Button';
 import NoIcon from '../../assets/No-icon.svg';
 import Header from '../../components/Header/Header';
 import ErrorPrevention from '../../components/ErrorPrevention/ErrorPrevention';
+import PoseDetection from '../../components/PoseDetection/PoseDetection';
 
 const Recording = () => {  
   const [showErrorPrevention, setShowErrorPrevention] = useState(false);
@@ -39,6 +40,7 @@ const Recording = () => {
         variant="red"
       />
 
+      <PoseDetection/>
       {showErrorPrevention && (
         <ErrorPrevention
           text="Are you sure you want to end the recording?"
