@@ -23,6 +23,7 @@
 
       .logs-header {
         padding-bottom: 30px;
+        padding-top: 60px;
       }
   
       .log-item-container {
@@ -45,6 +46,7 @@
     .workout-overview-section {
       flex: 1;
       padding: 2rem;
+      padding-top: 90px;
   
       @media (max-width: 1023px) {
         display: none;

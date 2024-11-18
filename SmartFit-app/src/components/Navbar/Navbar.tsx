@@ -38,10 +38,10 @@ function Navbar({ logoImg, logoAlt }: NavbarProps) {
         <Link to="/logs">
           <img src={loginIcon} alt="Login Icon" className={styles.icon} /> Logs
         </Link>
-        <Link to="/login">
+        <Link to="/home">
           <img src={loginIcon} alt="Login Icon" className={styles.icon} /> Profile
         </Link>
-        <Link to="/login" className={styles.logoutButton}>
+        <Link to="/" className={styles.logoutButton}>
           <img src={loginIcon} alt="Login Icon" className={styles.icon} /> Log out
         </Link>
       </nav>

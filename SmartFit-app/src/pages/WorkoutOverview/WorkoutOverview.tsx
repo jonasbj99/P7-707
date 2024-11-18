@@ -30,7 +30,6 @@ const WorkoutOverview = ({ workoutData }: WorkoutOverviewProps) => {
 
   return (
     <div className="workout-overview">
-      <h2>Workout Overview</h2>
       <LogItems workoutData={workoutData} />
 
       <div className="button-wrapper" >
