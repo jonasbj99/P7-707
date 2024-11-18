@@ -22,8 +22,8 @@ const CurrentWorkout = () => {
       <div className="home-section">
         <Header
           variant={'phoneM'}
-          title='Current workout'
-          paragraph={'Start your new workout or check the ones you did before! Monitor your progress and improve idk'
+          title='Start workout'
+          paragraph={'Ready to start? Record and track your workout or view your results!'
           }
         />
 

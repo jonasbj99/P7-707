@@ -23,7 +23,7 @@ const Home = () => {
         <Header
           variant={'phoneL'}
           title='Homepage'
-          paragraph={'Start your new workout or check the ones you did before! Monitor your progress and improve idk'
+          paragraph={'Track your workouts, monitor progress, and achieve your fitness goals with SMARTFIT.'
           }
         />
 

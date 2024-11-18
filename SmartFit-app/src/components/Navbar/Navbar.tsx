@@ -32,10 +32,10 @@ function Navbar({ logoImg, logoAlt }: NavbarProps) {
 
       {/*Menu links*/}
       <nav className={`${styles.navLinks} ${menuOpen ? styles.menuOpen : ''}`}>
-        <Link to="/login">
+        <Link to="/current-workout">
           <img src={loginIcon} alt="Login Icon" className={styles.icon} /> Start workout
         </Link>
-        <Link to="/login">
+        <Link to="/logs">
           <img src={loginIcon} alt="Login Icon" className={styles.icon} /> Logs
         </Link>
         <Link to="/login">
