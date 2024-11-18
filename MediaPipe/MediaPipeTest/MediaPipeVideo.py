@@ -9,7 +9,9 @@ def write_landmarks_to_csv(landmarks, frame_number, csv_data):
         csv_data.append([frame_number, mp_pose.PoseLandmark(idx).name, landmark.x, landmark.y, landmark.z, landmark.visibility])
     print("\n")
 
-video_path = 'C:\\Users\\Opstart\\Desktop\\mpVid2.mp4'
+#video_path = 'C:\\Users\\Opstart\\Desktop\\mpVid2.mp4'
+#video_path = 'C:\\Users\\Opstart\\Desktop\\deadlift.mp4'
+video_path = 'C:\\Users\\Opstart\\Desktop\\squad.mp4'
 output_csv = 'C:\\Users\\Opstart\\Desktop\\xxx.csv'
 
 # Initialize MediaPipe Pose and Drawing utilities
@@ -69,7 +71,7 @@ while cap.isOpened():
     frame_number += 1
 
     # Check if 'q' is pressed to exit
-    key = cv2.waitKey(1) & 0xFF
+    key = cv2.waitKey(0) & 0xFF
     if key == ord('q'):
         break
 
