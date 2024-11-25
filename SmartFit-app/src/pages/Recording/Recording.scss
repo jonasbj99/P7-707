@@ -1,5 +1,3 @@
-@import '../../global.scss';
-
 .recordingPage {
   display: flex;
   flex-direction: column;
@@ -9,24 +7,22 @@
 }
 
 .recordingArea {
-  width: 100%;
-  max-width: 640px; // Adjust for PoseDetection dimensions
-  height: 480px;    // Match the PoseDetection canvas size
-  background-color: #000; // Black background if no video is rendered
+  width: 80%; // Default for desktop
+  max-width: 640px; // Limit for larger screens
+  aspect-ratio: 4 / 3; // Maintain a 4:3 aspect ratio for the video feed
+  background-color: #000; // Black background for the video feed
   border-radius: 8px;
   margin-bottom: 2rem;
   overflow: hidden;
 
   canvas {
-    width: 100%;
+    width: 100%; // The canvas adjusts to the container
     height: 100%;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%; // Full width for phones and small screens
+    max-width: 100%;
+    margin: 0; // Remove margins on smaller screens
   }
 }
-
-
-  .placeholderImage {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 8px;
-  }
