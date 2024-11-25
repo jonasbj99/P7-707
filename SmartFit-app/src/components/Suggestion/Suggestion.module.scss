@@ -1,0 +1,32 @@
+@import '../../global.scss';  
+
+.SuggestionBox {
+    background-color: $white-color;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 130px;
+    margin-top: 20px;
+    width: 328px;
+    font-family: $font-family-poppins;
+    font-size: 14px;
+    text-align: center;
+    color: $dark-color;
+    padding: 32px;}
+  
+.suggestionText {
+      margin: 0;
+      text-align: center;
+    }
+
+    @media (min-width: 1024px) {
+        .SuggestionBox {
+          width: 742px;
+          height: 170px;
+          font-size: 16px; 
+          padding: 62px;
+          
+        }
+      }
+      
+  
+  

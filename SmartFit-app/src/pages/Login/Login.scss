@@ -1,0 +1,70 @@
+body {
+  display: block;
+  align-items: initial; 
+  justify-content: initial;
+}
+
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+
+  .logo {
+    width: 350px;
+    margin-bottom: 30px;
+  }
+
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 300px;
+    margin-top: 60px;
+  }
+
+  .image-section {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    align-items: stretch;
+    padding: 0;
+    margin: 0;
+
+    .image-section {
+      display: flex;
+      width: 40vw;
+      height: 100vh;
+      align-items: center;
+      justify-content: center;
+
+      .background-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .login-section {
+      width: 60vw;
+      height: 100vh;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo {
+      width: 320px;
+      margin-bottom: 0px;
+    }
+  }
+}

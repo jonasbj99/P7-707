@@ -1,0 +1,81 @@
+@import '../../global.scss';  
+
+.SetOverview {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 328px;
+    height:37px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;}
+  
+.SetOverview_item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: $white-color;
+      border: 1px solid $blue-color;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+  
+.SetOverview_label {
+    font-weight: 700;
+    color: $white-color;
+    background-color: $blue-color;  
+    padding: 12px 30px;     
+    border-radius: 7px;         
+    font-size: 15px;           
+    min-width: 60px;             
+    }
+ .SetOverview_labelReps{
+    font-weight: 700;
+    color: $white-color;
+    background-color: $blue-color;  
+    padding: 12px 42px;     
+    border-radius: 7px;         
+    font-size: 15px;           
+    min-width: 60px;      
+ }
+.SetOverview_value {
+      color: $dark-color;
+      margin-right: 20px;
+      font-weight: 500;
+    }
+  
+.SetOverview_note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 35px;
+      border: 1px solid $blue-color;
+      border-radius: 8px;
+      color: $dark-color;
+      background-color: $white-color;
+      font-style: italic;
+      font-size: 15px;
+  
+    }
+  
+    @media (min-width: 1024px) {
+        .SetOverview {
+          width: 742px;
+          height: 56px;  
+        }
+
+        .SetOverview_label {
+            font-size: 17px; 
+        }
+
+        .SetOverview_value{
+            font-size: 17px;  
+            margin-right: 40px;
+        }
+
+        .SetOverview_labelReps{
+            font-size: 17px; 
+        }
+
+      }
+      

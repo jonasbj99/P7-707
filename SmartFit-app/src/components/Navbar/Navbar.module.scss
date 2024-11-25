@@ -1,0 +1,139 @@
+@import '../../global.scss';
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: $dark-color;
+  color: $white-color;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+  width: 15px;
+}
+
+.burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 30px;
+  height: 24px;
+  cursor: pointer;
+  position: relative;
+}
+
+.line {
+  width: 100%;
+  height: 3px;
+  background-color: $white-color;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Burger icon animation when open */
+.lineOpen:nth-child(1) {
+  transform: rotate(45deg);
+  position: absolute;
+  top: 50%;
+}
+
+.lineOpen:nth-child(2) {
+  opacity: 0;
+}
+
+.lineOpen:nth-child(3) {
+  transform: rotate(-45deg);
+  position: absolute;
+  top: 50%;
+}
+
+/* Menu Links */
+.navLinks {
+  display: none;
+  gap: 2rem;
+  align-items: center;
+}
+
+/* Mobile Menu */
+.menuOpen {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.navLinks a {
+  color: $white-color;
+  text-decoration: none;
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: $font-family-poppins;
+}
+
+.navLinks a:hover {
+  color: $orange-color;
+}
+
+.logoutButton {
+  background-color: $orange-color;
+  color: $white-color;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 700;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background-color: $orange-hover;
+    color: $white-color !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbar {
+    height: 80px;
+  }
+
+  .burger {
+    display: none;
+  }
+
+  .navLinks {
+    display: flex;
+    gap: 1rem; 
+  }
+
+  .navLinks a {
+    padding: 0.5rem 1rem;
+    font-size: 18px;
+    white-space: nowrap;
+  }
+
+  .menuOpen {
+    display: none;
+  }
+
+  .navLinks a .icon {
+    display: none;
+  }
+}
