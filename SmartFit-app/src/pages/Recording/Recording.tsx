@@ -5,11 +5,29 @@ import NoIcon from "../../assets/No-icon.svg";
 import Header from "../../components/Header/Header";
 import ErrorPrevention from "../../components/ErrorPrevention/ErrorPrevention";
 import PoseDetection from "../../components/PoseDetection/PoseDetection";
-
+import * as mpPose from "@mediapipe/pose";
 const Recording = () => {
   const [showErrorPrevention, setShowErrorPrevention] = useState(false);
+  const [landMarkLogs,setLandmarkLogs] = useState<mpPose.NormalizedLandmark[][]>([]);
 
-  const handleEndClick = () => {
+  const handleEndClick = async () => {
+
+    const resp = await fetch("http://127.0.0.1:5000/predict",{
+      method:"POST",
+
+      headers:{
+        "Content-Type":"application/json",
+      },
+      body:JSON.stringify({
+        landmarks:landMarkLogs
+      })
+    })
+
+    const data = await resp.json();
+
+    console.log("dataResponseFromServer",data)
+
+
     setShowErrorPrevention(true);
   };
 
@@ -17,13 +35,16 @@ const Recording = () => {
     setShowErrorPrevention(false); // Reset showErrorPrevention when the modal is closed
   };
 
+  
+  
+
   return (
     <div className="recordingPage">
       <Header variant={"phoneM"} title="Recording" />
 
       {/* Replace the placeholder with PoseDetection */}
       <div className="recordingArea">
-        <PoseDetection />
+        <PoseDetection setLandmarkLogs={setLandmarkLogs}/>
       </div>
 
       <Button

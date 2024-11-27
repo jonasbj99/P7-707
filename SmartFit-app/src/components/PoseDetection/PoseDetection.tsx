@@ -1,11 +1,60 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef,useState } from "react";
 import * as mpPose from "@mediapipe/pose";
 import * as drawingUtils from "@mediapipe/drawing_utils";
 import { Camera } from "@mediapipe/camera_utils";
+import axios from "axios"; 
 
-const PoseDetection: React.FC = () => {
+
+
+type PoseDetectionProps = {
+  setLandmarkLogs: React.Dispatch<React.SetStateAction<mpPose.NormalizedLandmark[][]>>;
+};
+
+const PoseDetection: React.FC<PoseDetectionProps> = ({ setLandmarkLogs }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [landmarkSequence, setLandmarkSequence] = useState<mpPose.NormalizedLandmark[][]>([]);
+
+ // Prepare landmarks for backend prediction
+ const prepareLandmarksForBackend = (landmarks: mpPose.NormalizedLandmark[]) => {
+  return landmarks.map(landmark => ({
+    visibility: landmark.visibility || 0.0,
+    x: landmark.x || 0.0,
+    y: landmark.y || 0.0,
+    z: landmark.z || 0.0,
+  }));
+};
+
+ //  Sending landmarks to backend for prediction
+ const sendLandmarksToPrediction = async (landmarks: mpPose.NormalizedLandmark[][]) => {
+  // Only sending if we have enough frames 
+  if (landmarks.length < 5) return;
+
+  try {
+    // Take the last 5 frames for prediction
+    const landmarksToSend = landmarks.slice(-5).map(prepareLandmarksForBackend);
+
+    const response = await axios.post('http://127.0.0.1:5000/predict', {
+      landmarks: landmarksToSend
+    });
+
+    console.log('Prediction:', response.data);
+  } catch (error) {
+    console.error('Prediction error:', error);
+  }
+};
+//  Periodic prediction interval
+useEffect(() => {
+  const predictionInterval = setInterval(() => {
+    if (landmarkSequence.length > 0) {
+      sendLandmarksToPrediction(landmarkSequence);
+    }
+  }, 1000); // Send prediction every second
+
+  return () => {
+    clearInterval(predictionInterval);
+  };
+}, [landmarkSequence]); // Dependency ensures it updates with new sequences
 
   useEffect(() => {
     // Initialize MediaPipe Pose
@@ -34,8 +83,23 @@ const PoseDetection: React.FC = () => {
 
       // Draw landmarks
       if (results.poseLandmarks) {
+        //console.log(results.poseLandmarks);
+        
         drawingUtils.drawConnectors(ctx, results.poseLandmarks, mpPose.POSE_CONNECTIONS);
         drawingUtils.drawLandmarks(ctx, results.poseLandmarks);
+
+         // [CHANGE] Keep existing landmark logging
+         setLandmarkLogs((prevLogs) => [...prevLogs, results.poseLandmarks]);
+        
+         // [CHANGE] NEW: Update landmark sequence for prediction
+         setLandmarkSequence((prevSequence) => {
+           // Keep only last 10 frames to prevent memory issues
+           const updatedSequence = [...prevSequence, results.poseLandmarks].slice(-10);
+           return updatedSequence;
+         });
+        
+        // setLandmarkLogs((prevLogs) => [...prevLogs, results.poseLandmarks]);
+
       }
     });
 
