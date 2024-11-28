@@ -1,0 +1,36 @@
+Exercise10:
+-   Prediction every 10 frames:
+    -   Good with deadlift
+    -   Too confident and usually always predicts something with high confidence
+    -   Cant seem to predict squat start, might need nothing to avoid wronful predictions
+-   Prediction every frame:
+    -   Still struggles with squat start
+    -   Less confidence in all predictions 
+    -   Still good with deadlift predictions
+
+Exercise30:
+-   Prediciton every 30 frames:
+    -   Pretty low confidence most of the time
+    -   Slow and therefore skips exercise states
+    -   Correct predicitons when slowing down repititions to follow the frame rate
+-   Prediction every 10 frames:
+    -   Fast enough to follow the reps
+    -   Great with squat
+    -   Lacks confidence with deadlift usually between 50% and 70% sometimes above, but still correct
+-   Prediction every frame:
+    -   Still struggles abit with deadlift confidence and slight tendency to predict contraction instead of the actual start position
+    -   Still works well with squat
+
+Exercise30n:
+-   Prediction every 30 frames:
+    -   Worked well, even the tempo seemed to match decently, and somehow felt better than every 30 frames with Exercise30
+    -   Tends to predict deadlift-c with high confidence when doing nothing
+-   Prediction every 10 frames:
+    -   Works well
+    -   Sometimes seems to predict squat contraction with low confidence when the movement is near squat start
+-   Prediction every frame:
+    -   Works well, but predictions seems to be delayed, probably because of the amount of computing being done
+    -   Slight sideways to camera:
+        -   Only model and framerate tested sideways
+        -   Mediapipe struggled to track one arm at some angles
+        -   Predictions still seemed to work
