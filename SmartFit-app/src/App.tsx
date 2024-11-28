@@ -10,6 +10,7 @@ import Set from './pages/Set/Set';
 import WorkoutOverview from './pages/WorkoutOverview/WorkoutOverview';
 import Logs from './pages/Logs/Logs';
 
+
 function App() {
   // Define workout data here
   const workoutData = [

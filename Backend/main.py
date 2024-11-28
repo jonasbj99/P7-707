@@ -2,9 +2,18 @@ from flask import Flask, request, jsonify
 import tensorflow as tf
 import numpy as np
 from flask_cors import CORS
+from ultralytics import YOLO
+import base64
+from io import BytesIO
+from PIL import Image
+import json
 
 # Load the trained model
-model = tf.keras.models.load_model('model/action.h5')
+model = tf.keras.models.load_model('model/exercise30n.keras')
+yolo_model = YOLO('model/object_detect.pt')
+class_names = yolo_model.names  # This retrieves the class names dictionary
+
+
 print("Model Input Shape:", model.input_shape)
 
 actions = np.array(['nothing', 'deadlift-s', 'deadlift-c', 'squat-s', 'squat-c'])
@@ -24,7 +33,7 @@ def process_landmarks(landmarks):
     """
     processed_landmarks = []
 
-    for frame in landmarks[:30]:  # Ensure max 30 frames
+    for frame in landmarks:  # Ensure max 30 frames
         frame_landmarks = []
 
         for landmark in frame[:33]:  # Use only the first 25 landmarks
@@ -51,6 +60,50 @@ def process_landmarks(landmarks):
 
     return processed_landmarks
 
+def process_weight_prediction(base_64_image_string):
+    import supervision as sv
+
+
+    # Step 1: Extract the base64 string (remove the prefix part)
+    image_data = base_64_image_string.split(",")[1]
+
+    # Step 2: Decode the base64 string to raw image bytes
+    image_bytes = base64.b64decode(image_data)
+
+    # Step 3: Convert bytes into an image
+    image = Image.open(BytesIO(image_bytes))
+    image.save("test.png")
+
+    # Step 4: Convert the PIL image to a NumPy array (for use with most ML models)
+    image_np = np.array(image)
+
+    # Step 5: If needed, convert the image to the appropriate format (e.g., resize, normalize, etc.)
+    # For example, if the model expects the image in a specific format or shape, we can process it here
+    # Here, let's assume the model expects the image to be (height, width, channels), e.g., (224, 224, 3)
+    #image_resized = image.resize((224, 224))
+    #image_np = np.array(image_resized)
+    result = yolo_model.predict(image_np, conf=0.8)[0]
+
+    detections = sv.Detections.from_ultralytics(result)
+
+    box_annotator = sv.BoxAnnotator()
+    label_annotator = sv.LabelAnnotator(text_color=sv.Color.BLACK)
+
+    annotated_image = image.copy()
+    annotated_image = box_annotator.annotate(annotated_image, detections=detections)
+    annotated_image = label_annotator.annotate(annotated_image, detections=detections)
+    annotated_image.save("test_annoted.png")
+
+    detection_data = {
+       
+        "confidence_scores": detections.confidence.tolist(),  # Confidence scores
+        "class_ids": detections.class_id.tolist(),  # Class IDs
+        "class_names": [class_names[class_id] for class_id in detections.class_id]  # Add class names
+
+    }
+
+    return detection_data
+
 @app.route('/predict', methods=['POST', 'OPTIONS'])
 def predict():
     if request.method == 'OPTIONS':
@@ -66,6 +119,9 @@ def predict():
         if 'landmarks' not in payload:
             return jsonify({'error': 'No landmarks provided'}), 400
         
+        if 'firstFrame' not in payload:
+            return jsonify({'error': 'No Frame provided'}), 400
+        
         landmarks = payload['landmarks']
         
         if not landmarks or not isinstance(landmarks, list):
@@ -80,15 +136,20 @@ def predict():
         
         # Extract prediction results
         predicted_class = np.argmax(prediction, axis=1)[0]
+        
         confidence = prediction[0][predicted_class]
         predicted_exercise = actions[predicted_class]
 
+
+        weight_prediction = process_weight_prediction(payload["firstFrame"])
+        
         return jsonify({
             'predicted_class': int(predicted_class),
             'confidence': float(confidence),
             'predicted_exercise': predicted_exercise,
             'all_probabilities': prediction[0].tolist(),
-            'input_shape': list(processed_landmarks.shape)
+            'input_shape': list(processed_landmarks.shape),
+            "weight_prediction":weight_prediction,
         })
     
     except Exception as e:

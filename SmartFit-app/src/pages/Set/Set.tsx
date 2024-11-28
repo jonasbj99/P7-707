@@ -7,9 +7,12 @@ import NoIcon from '../../assets/No-icon.svg';
 import PlayIcon from '../../assets/Play-icon.svg';
 import Suggestion from '../../components/Suggestion/Suggestion';
 import SetOverview from '../../components/SetOverview/SetOvervie';
-
+import { useAtomValue } from 'jotai';
+import { responseAtom } from '../../atom/response';
 const Set = () => {
     const navigate = useNavigate();
+
+    const lastResponse = useAtomValue(responseAtom);
   
     const handleStartRecordingClick = () => {
       navigate('/recording');
@@ -18,7 +21,20 @@ const Set = () => {
     const handleEndClick = () => {
       navigate('/workoutoverview');
     };
-  
+
+    const weightPredictions = lastResponse?.weight_prediction;
+
+// Check if weightPredictions exists and has class_names
+const weights = weightPredictions?.class_names as string[] || [];
+
+// Calculate the sum only if weights exist
+const sum = weights.reduce((acc, weight) => {
+  const numericValue = parseFloat(weight.replace(/kg/i, "")); // Remove 'kg' and parse as number
+  return acc + (isNaN(numericValue) ? 0 : numericValue);
+}, 0);
+
+const totalWeights = sum;
+
     return (
       <div className="set_div-page">  
         <div className="setheader-section">
@@ -30,7 +46,7 @@ const Set = () => {
           <Suggestion message={'Nice set! Next time try to go a little bit deeper or stretch more before the exercise for bigger range of motion.'}/>
 
           <div className="set_overview">
-          <SetOverview exercise={'Squat'} reps={10} weight={55}/>
+          <SetOverview exercise={lastResponse.predicted_exercise} reps={10} weight={totalWeights}/>
 
           <div className="set_button-group">
             <Button
