@@ -22,7 +22,7 @@ function LogItems({ workoutData }: LogItemsProps) {
   return (
     <div className={styles.workoutOverview}>
       <Header
-         variant={'phoneM'}
+         variant={'phoneS'}
          title='Workout Overview'
         />
 

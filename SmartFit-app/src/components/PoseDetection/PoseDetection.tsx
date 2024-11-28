@@ -1,14 +1,16 @@
-import React, { useEffect, useRef } from "react";
-import * as mpPose from "@mediapipe/pose";
-import * as drawingUtils from "@mediapipe/drawing_utils";
-import { Camera } from "@mediapipe/camera_utils";
+import React, { useEffect, useRef } from 'react';
+import styles from './PoseDetection.module.scss'; // Assume you have a CSS module for styling
+import * as mpPose from '@mediapipe/pose';
+import * as drawingUtils from '@mediapipe/drawing_utils';
+import { Camera } from '@mediapipe/camera_utils';
 
-const PoseDetection: React.FC = () => {
+function PoseDetection() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    // Initialize MediaPipe Pose
+    let isMounted = true;
+
     const pose = new mpPose.Pose({
       locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`,
     });
@@ -20,29 +22,29 @@ const PoseDetection: React.FC = () => {
     });
 
     pose.onResults((results) => {
+      if (!isMounted) return;
+
       const canvas = canvasRef.current;
       const video = videoRef.current;
 
-      if (!canvas || !video) return;
-
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return;
-
-      // Draw the video feed
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-      // Draw landmarks
-      if (results.poseLandmarks) {
-        drawingUtils.drawConnectors(ctx, results.poseLandmarks, mpPose.POSE_CONNECTIONS);
-        drawingUtils.drawLandmarks(ctx, results.poseLandmarks);
+      if (canvas && video) {
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+          if (results.poseLandmarks) {
+            drawingUtils.drawConnectors(ctx, results.poseLandmarks, mpPose.POSE_CONNECTIONS);
+            drawingUtils.drawLandmarks(ctx, results.poseLandmarks);
+          }
+        }
       }
     });
 
-    // Initialize webcam feed
     const camera = new Camera(videoRef.current!, {
       onFrame: async () => {
-        await pose.send({ image: videoRef.current! });
+        if (isMounted) {
+          await pose.send({ image: videoRef.current! });
+        }
       },
       width: 640,
       height: 480,
@@ -51,16 +53,18 @@ const PoseDetection: React.FC = () => {
     camera.start();
 
     return () => {
+      isMounted = false;
       pose.close();
+      camera.stop();
     };
   }, []);
 
   return (
-    <div>
-      <video ref={videoRef} style={{ display: "none" }} />
-      <canvas ref={canvasRef} width={640} height={480} />
+    <div className={styles.poseDetection}>
+      <video ref={videoRef} className={styles.hiddenVideo} />
+      <canvas ref={canvasRef} className={styles.canvas} width={640} height={480} />
     </div>
   );
-};
+}
 
 export default PoseDetection;
