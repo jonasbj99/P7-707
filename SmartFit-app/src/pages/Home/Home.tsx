@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import Header from '../../components/Header/Header';
 import '../../pages/Home/Home.scss';
-import WorkoutIcon from '../../assets/Workout-icon.svg';
+import WorkoutItem from '../../assets/Workout-item.svg';
 import LogIcon from '../../assets/Log-icon.svg';
 
 const Home = () => {
@@ -29,7 +29,7 @@ const Home = () => {
 
         <div className="button-group">
           <Button
-            icon= {WorkoutIcon}
+            icon= {WorkoutItem}
             label="Start Workout"
             onClick={handleStartWorkoutClick}
             variant="orange"

@@ -25,12 +25,15 @@ const Recording = () => {
         <PoseDetection />
       </div>
 
-      <Button
+      <div className="buttonRecording">
+       <Button 
         icon={NoIcon}
         label="End Recording"
         onClick={handleEndClick}
         variant="red"
       />
+      </div>
+      
 
       {showErrorPrevention && (
         <ErrorPrevention

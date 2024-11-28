@@ -12,7 +12,7 @@
   aspect-ratio: 4 / 3;
   background-color: #000;
   border-radius: 8px;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   overflow: hidden;
 
   canvas {
@@ -20,9 +20,11 @@
     height: 100%;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (min-width: 1024px) {
     width: 100%;
     max-width: 100%;
-    margin: 0;
   }
+  .recordingArea {
+    margin-bottom: 3rem;
+    }
 }

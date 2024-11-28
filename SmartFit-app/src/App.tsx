@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
-import logoImg from './assets/Workout-icon.svg';
+import logoImg from './assets/Workout-item.svg';
 import Home from './pages/Home/Home';
 import StartWorkout from './pages/StartWorkout/StartWorkout';
 import Recording from './pages/Recording/Recording';

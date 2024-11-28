@@ -1,5 +1,5 @@
 .workout-overview {
-  padding: 1rem;
+  padding: 3rem;
   padding-top: 150px;
 
   .button-wrapper {
@@ -8,5 +8,17 @@
     justify-content: center;
     align-items: center;
   }
+
+  @media (min-width: 1024px) {
+    .workout-overview {
+      padding: 3rem;
+      padding-top: 150px;
+  }
+  .button-wrapper {
+    padding-top: 50px;
+    
+  }
+} 
 }
+
 

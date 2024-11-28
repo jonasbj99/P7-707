@@ -7,11 +7,13 @@
 .workoutTable {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 1rem;
   width: 90%;
   max-width: 400px;
   margin: 0 auto;
-  background-color: $white-color;
+  border-radius:8px ;
+  margin-bottom: 40px;
+  margin-top: 20px;
 }
 
 .workoutItem {
@@ -19,6 +21,7 @@
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
+  background-color: $white-color;
 
   .workoutHeader {
     background-color: $blue-color;
@@ -99,6 +102,7 @@
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    margin-top:20px;
   }
 
   .workoutHeader {
