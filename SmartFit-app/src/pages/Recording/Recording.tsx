@@ -21,7 +21,6 @@ const Recording = () => {
     <div className="recordingPage">
       <Header variant={"phoneM"} title="Recording" />
 
-      {/* Replace the placeholder with PoseDetection */}
       <div className="recordingArea">
         <PoseDetection />
       </div>
