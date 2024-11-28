@@ -39,7 +39,7 @@ const PoseDetection: React.FC<PoseDetectionProps> = ({ setLandmarkLogs,firstFram
     // Take the last 5 frames for prediction
     const landmarksToSend = landmarks.slice(-5).map(prepareLandmarksForBackend);
 
-    const response = await axios.post('http://127.0.0.1:5001/predict', {
+    const response = await axios.post('http://127.0.0.1:5000/predict', {
       landmarks: landmarksToSend
     });
 
