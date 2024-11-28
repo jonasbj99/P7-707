@@ -1,5 +1,4 @@
-Test exercise10n
-	With and without frame reset
-Test exercise30n
-	Without frame reset
-Train exercise10 and exercise30 without 'nothing'
+Future work:
+	-	Check predictions at angles.
+	-	Consider the effect of removing keypoints from pose detection and therefore using fewer keypoints when creating the model.
+	-	Change 'nothing' to 'unknown'
