@@ -7,13 +7,21 @@ import base64
 from io import BytesIO
 from PIL import Image
 import json
+import supervision as sv
+from concurrent.futures import ThreadPoolExecutor
+import requests
 
-# Load the trained model
-model = tf.keras.models.load_model('model/exercise30n.keras')
-yolo_model = YOLO('model/object_detect.pt')
+# Load the trained models
+model = tf.keras.models.load_model('model/exercise30n+-1.keras')
+yolo_model = YOLO('model/best.pt')
 class_names = yolo_model.names  # This retrieves the class names dictionary
+print(model.summary())
 
-
+class_names_to_weight = {
+    "0":10,
+    "1":5,
+    "2":0
+}
 print("Model Input Shape:", model.input_shape)
 
 actions = np.array(['nothing', 'deadlift-s', 'deadlift-c', 'squat-s', 'squat-c'])
@@ -21,68 +29,43 @@ actions = np.array(['nothing', 'deadlift-s', 'deadlift-c', 'squat-s', 'squat-c']
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
-def process_landmarks(landmarks):
-    """
-    Process landmarks from frontend to match model input requirements.
+def get_demo_data():
+    with open("testdata.json", "r") as f:
+        return json.load(f)
 
-    Args:
-    landmarks (list): Landmark data from frontend
+def preprocess_landmarks(landmarks):
+    # Flatten the 33 landmarks, each having (x, y, z) coordinates
+    print(len(landmarks))
+    frame = []
+    for landmark in landmarks:
+        frame.extend([landmark["x"], landmark["y"], landmark["z"]])
+    return np.array(frame)
 
-    Returns:
-    numpy.ndarray: Processed landmark data for model prediction
-    """
-    processed_landmarks = []
 
-    for frame in landmarks:  # Ensure max 30 frames
-        frame_landmarks = []
+def predict_workout_from_landmarks(landmarks):
 
-        for landmark in frame[:33]:  # Use only the first 25 landmarks
-            frame_landmarks.extend([
-                landmark.get('x', 0.0),
-                landmark.get('y', 0.0),
-                landmark.get('z', 0.0),
-            ])
-
-        # Ensure each frame is flattened into a single array of 99 features
-        frame_landmarks = np.array(frame_landmarks, dtype=np.float32)
-        processed_landmarks.append(frame_landmarks[:99])  # Trim to 99 features
-
-    # Ensure exactly 30 frames (pad with zeros if fewer)
-    while len(processed_landmarks) < 30:
-        processed_landmarks.append(np.zeros(99, dtype=np.float32))
-
-    processed_landmarks = np.array(processed_landmarks, dtype=np.float32)
-    print("Processed landmarks array shape:", processed_landmarks.shape)
-
-    # Add batch dimension for model input
-    processed_landmarks = np.expand_dims(processed_landmarks, axis=0)  # (1, 30, 99)
-    print("Final input shape for model:", processed_landmarks.shape)
-
-    return processed_landmarks
+    return
 
 def process_weight_prediction(base_64_image_string):
-    import supervision as sv
-
 
     # Step 1: Extract the base64 string (remove the prefix part)
-    image_data = base_64_image_string.split(",")[1]
+    image_data = base_64_image_string.split("data:image/png;base64,")[1]
 
     # Step 2: Decode the base64 string to raw image bytes
     image_bytes = base64.b64decode(image_data)
 
     # Step 3: Convert bytes into an image
     image = Image.open(BytesIO(image_bytes))
+    image = image.convert("RGB")
     image.save("test.png")
 
     # Step 4: Convert the PIL image to a NumPy array (for use with most ML models)
     image_np = np.array(image)
 
-    # Step 5: If needed, convert the image to the appropriate format (e.g., resize, normalize, etc.)
-    # For example, if the model expects the image in a specific format or shape, we can process it here
-    # Here, let's assume the model expects the image to be (height, width, channels), e.g., (224, 224, 3)
-    #image_resized = image.resize((224, 224))
-    #image_np = np.array(image_resized)
-    result = yolo_model.predict(image_np, conf=0.8)[0]
+   
+    result = yolo_model.predict(image_np, conf=0.75)[0]
+
+    
 
     detections = sv.Detections.from_ultralytics(result)
 
@@ -98,13 +81,69 @@ def process_weight_prediction(base_64_image_string):
        
         "confidence_scores": detections.confidence.tolist(),  # Confidence scores
         "class_ids": detections.class_id.tolist(),  # Class IDs
-        "class_names": [class_names[class_id] for class_id in detections.class_id]  # Add class names
+       
+        "class_names": [class_names[class_id] for class_id in detections.class_id],  # Add class names
+        "formatted_weights":[class_names_to_weight[str(class_id)] for class_id in detections.class_id],
 
     }
 
     return detection_data
 
-@app.route('/predict', methods=['POST', 'OPTIONS'])
+def process_weights(data):
+    # Step 1: Initialize a set to store unique weights
+    unique_weights = set()
+
+    # Step 2: Loop through each frame prediction
+    for frame in data:
+        # Check if 'formatted_weights' has 2 or more elements
+        if len(frame['formatted_weights']) >= 2:
+            # Add weights to the set (set automatically handles uniqueness)
+            unique_weights.update(frame['formatted_weights'])
+
+    # Step 3: Calculate the total weight (sum of unique weights)
+    total_weight = sum(unique_weights)
+
+    return unique_weights, total_weight
+
+
+#landmark for one single frame i.e 33 landmarks
+def predict_workout_by_landmarks(landmarks):
+    import random
+    return random.choice(["squat-c","squat-s","none"])
+
+def process_positions(frames):
+    # Filter out irrelevant positions (keep only items ending in -s or -c)
+    filtered_frames = [frame for frame in frames if frame.endswith("-s") or frame.endswith("-c")]
+    
+    # Remove consecutive duplicates
+    processed_frames = []
+    for frame in filtered_frames:
+        if not processed_frames or processed_frames[-1] != frame:
+            processed_frames.append(frame)
+    
+    # Map positions dynamically to up or down based on the suffix
+    result = ["up" if pos.endswith("-s") else "down" for pos in processed_frames]
+    
+    return result
+
+def most_recurring(items):
+    if not items:  # Handle empty list
+        return None
+    
+    # Create a dictionary to manually count occurrences
+    counts = {}
+    for item in items:
+        counts[item] = counts.get(item, 0) + 1  # Increment count for each item
+    
+    # Find the maximum frequency
+    max_count = max(counts.values())
+    
+    # Return all items with the maximum frequency
+    most_recurring_items = [item for item, freq in counts.items() if freq == max_count]
+    
+    return most_recurring_items[0]
+
+@app.route('/predict', methods=['POST', 'OPTIONS', 'GET'])
 def predict():
     if request.method == 'OPTIONS':
         response = jsonify(success=True)
@@ -114,46 +153,45 @@ def predict():
         return response
     
     try:
+        # Get the data (for now using demo data)
+
         payload = request.get_json()
-        
-        if 'landmarks' not in payload:
-            return jsonify({'error': 'No landmarks provided'}), 400
-        
-        if 'firstFrame' not in payload:
-            return jsonify({'error': 'No Frame provided'}), 400
-        
-        landmarks = payload['landmarks']
-        
-        if not landmarks or not isinstance(landmarks, list):
-            return jsonify({'error': 'Invalid landmarks format'}), 400
-        
-        # Process landmarks and predict
-        processed_landmarks = process_landmarks(landmarks)
-        prediction = model.predict(processed_landmarks)
-        
-        # Debug: Print full prediction probabilities
-        print("Full Prediction Probabilities:", prediction[0])
-        
-        # Extract prediction results
-        predicted_class = np.argmax(prediction, axis=1)[0]
-        
-        confidence = prediction[0][predicted_class]
-        predicted_exercise = actions[predicted_class]
+        #payload = get_demo_data()
+        all_landmarks = payload["mediapipeLogs"]
+        all_frames = payload["frames"]
+        all_frames_images = [frame["base64Image"] for frame in all_frames]
+        all_frame_landmarks = [frame["landmarks"] for frame in all_landmarks]
 
+        frame_data = [preprocess_landmarks(frame) for frame in all_frame_landmarks]
 
-        weight_prediction = process_weight_prediction(payload["firstFrame"])
+        #sequence = frame_data
+
+        #test_frme= all_frames[0]["base64Image"]
+
+        #llm_prediction = groq_llm_prediction_img(test_frme)
+
+        # Use multithreading to process frames
+        with ThreadPoolExecutor() as executor:
+            weight_prediction_results = list(executor.map(process_weight_prediction, all_frames_images))
+
+        with ThreadPoolExecutor() as executor:
+            workout_prediction_results = list(executor.map(predict_workout_by_landmarks, all_frame_landmarks))
+
         
-        return jsonify({
-            'predicted_class': int(predicted_class),
-            'confidence': float(confidence),
-            'predicted_exercise': predicted_exercise,
-            'all_probabilities': prediction[0].tolist(),
-            'input_shape': list(processed_landmarks.shape),
-            "weight_prediction":weight_prediction,
-        })
+        
+        total_reps=   process_positions(workout_prediction_results)
+        # Map results back to frames
+        response = {
+           
+            "total_weight": (process_weights(weight_prediction_results))[-1],
+            "total_reps":len(total_reps) // 2,
+            "workout":most_recurring(workout_prediction_results),
+        }
+        return jsonify(response)
     
     except Exception as e:
+        
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5001, debug=True)
