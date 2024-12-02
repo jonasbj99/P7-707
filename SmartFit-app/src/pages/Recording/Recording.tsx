@@ -7,7 +7,9 @@ import ErrorPrevention from "../../components/ErrorPrevention/ErrorPrevention";
 import PoseDetection from "../../components/PoseDetection/PoseDetection";
 import * as mpPose from "@mediapipe/pose";
 import { useSetAtom } from "jotai";
-import { responseAtom } from "../../atom/response";
+import { recordingLogsAtom, responseAtom } from "../../atom/response";
+
+import { useAtomValue } from "jotai";
 const Recording = () => {
   const [showErrorPrevention, setShowErrorPrevention] = useState(false);
   const [landMarkLogs,setLandmarkLogs] = useState<mpPose.NormalizedLandmark[][]>([]);
@@ -16,7 +18,13 @@ const Recording = () => {
 
   const setResponseAtom = useSetAtom(responseAtom);
 
+  const recordingLogs = useAtomValue(recordingLogsAtom)
+
   const handleEndClick = async () => {
+
+    console.log("recordingLogs",recordingLogs)
+    setShowErrorPrevention(true);
+    return;
 
     const resp = await fetch("http://127.0.0.1:5000/predict",{
       method:"POST",
