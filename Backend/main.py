@@ -10,9 +10,10 @@ import json
 import supervision as sv
 from concurrent.futures import ThreadPoolExecutor
 import requests
+from counter import ExerciseRepetitionCounter
 
 # Load the trained models
-model = tf.keras.models.load_model('model/exercise30n.keras')
+model = tf.keras.models.load_model('model/exercise30n+.keras')
 yolo_model = YOLO('model/best.pt')
 class_names = yolo_model.names  # This retrieves the class names dictionary
 print(model.summary())
@@ -195,7 +196,7 @@ def predict():
         # Get the data (for now using demo data)
 
         payload = request.get_json()
-        #payload = get_demo_data()
+        # payload = get_demo_data()
         all_landmarks = payload["mediapipeLogs"]
         all_frames = payload["frames"]
 
@@ -218,21 +219,41 @@ def predict():
             workout_prediction_results = list(executor.map(predict_30_frame_landmark, chunked_landmarks))
 
         
-        total_reps = process_positions(workout_prediction_results)
-        print("workouts",workout_prediction_results)
-        print("most_recurring",most_recurring(workout_prediction_results))
+        #print(workout_prediction_results)
+        
+        most_recurring_workout = most_recurring(workout_prediction_results)
+        #print("most_recurring",most_recurring(workout_prediction_results))
+        counter = ExerciseRepetitionCounter()
+
+        for workout in workout_prediction_results:
+
+                counter.update_state(workout)
+
+        #only keep the most detected_workout
+        workout_prediction_results_filtered= [workout for workout in workout_prediction_results if workout == most_recurring_workout]
+
+        #calculate the reps for most detected workout
+        total_reps = process_positions(workout_prediction_results_filtered)
+
+
+
+
+        
 
         response = {
            
             "total_weight": (process_weights(weight_prediction_results))[-1],
-            "total_reps":len(total_reps) // 2,
+            "total_reps":counter.get_the_most_rep_count(),
             "workout": most_recurring(workout_prediction_results),
             "prediction":workout_prediction_results,
+            "squat-reps":counter.get_count('squat'),
+            "deadlift-reps":counter.get_count('deadlift')
+
         }
         return jsonify(response)
     
     except Exception as e:
-        
+        raise Exception(e)
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':

@@ -37,48 +37,6 @@ const PoseDetection: React.FC<PoseDetectionProps> = ({ setLandmarkLogs, firstFra
     });
     let lastLoggedSecond = -2; // Initialize to a value that ensures the first log is captured
 
-    // pose.onResults((results) => {
-    //   const canvas = canvasRef.current;
-    //   const video = videoRef.current;
-
-    //   if (!canvas || !video) return;
-
-    //   const ctx = canvas.getContext("2d");
-    //   if (!ctx) return;
-
-    //   // Draw the video feed
-    //   ctx.clearRect(0, 0, canvas.width, canvas.height);
-    //   ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-    //   // Draw landmarks
-    //   if (results.poseLandmarks) {
-    //     drawingUtils.drawConnectors(ctx, results.poseLandmarks, mpPose.POSE_CONNECTIONS);
-    //     drawingUtils.drawLandmarks(ctx, results.poseLandmarks);
-
-    //     const currentTime = Date.now();
-    //     const seconds = Math.floor((currentTime - recordingStartTime) / 1000); // Calculate timestamp in seconds
-
-    //     // Log data only every 3 seconds
-    //     if (seconds >= lastLoggedSecond + 2) {
-    //       const frameData: MediaFrame = {
-    //         second: seconds,
-    //         base64Image: canvas.toDataURL("image/png"), // Capture the current frame as a base64 image
-    //       };
-
-    //       const logData: MediaPipeLog = {
-    //         second: seconds,
-    //         landmarks: results.poseLandmarks,
-    //       };
-
-    //       setRecordingLogs((prevLogs) => ({
-    //         mediapipeLogs: [...prevLogs.mediapipeLogs, logData],
-    //         frames: [...prevLogs.frames, frameData],
-    //       }));
-
-    //       lastLoggedSecond = seconds; // Update the last logged second
-    //     }
-    //   }
-    // });
 
     pose.onResults((results) => {
       const canvas = canvasRef.current;

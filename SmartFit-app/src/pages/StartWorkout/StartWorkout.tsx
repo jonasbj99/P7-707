@@ -5,11 +5,18 @@ import Header from '../../components/Header/Header';
 import '../../pages/StartWorkout/StartWorkout.scss';
 import PlayIcon from '../../assets/Play-icon.svg';
 import NoIcon from '../../assets/No-icon.svg';
+import { recordingLogsAtom } from '../../atom/response';
+import { useSetAtom } from 'jotai';
 
 const StartWorkout = () => {
   const navigate = useNavigate();
+  const setRecordingLogs = useSetAtom(recordingLogsAtom);
 
   const handleStartRecordingClick = () => {
+    setRecordingLogs({
+      mediapipeLogs: [], // Array of MediaPipe logs
+      frames: [] , // Array of frame data
+  })
     navigate('/recording');
   };
 

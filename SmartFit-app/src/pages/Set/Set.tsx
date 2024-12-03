@@ -7,21 +7,26 @@ import NoIcon from '../../assets/No-icon.svg';
 import PlayIcon from '../../assets/Play-icon.svg';
 import Suggestion from '../../components/Suggestion/Suggestion';
 import SetOverview from '../../components/SetOverview/SetOvervie';
-import { useAtomValue } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { responseAtom } from '../../atom/response';
 import { recordingLogsAtom } from '../../atom/response';
+import { WorkoutLogs } from '../../atom/workouts';
 const Set = () => {
   const navigate = useNavigate();
 
   const lastResponse = useAtomValue(responseAtom);
   const recordingLogs = useAtomValue(recordingLogsAtom);
+  const setWorkoutLogs = useSetAtom(WorkoutLogs)
   const [isPredicting, setIsPredicting] = useState(true);
   const [isError, setIsError] = useState(false);
+  
   const [response, setResponse] = useState({
     "total_reps": 0,
     "total_weight": 0,
     "workout": "none"
   })
+
+  const [responseFetched,setResponseFetched] = useState(false);
 
 
   const handleStartRecordingClick = () => {
@@ -40,7 +45,7 @@ const Set = () => {
       try {
         setIsPredicting(true);
 
-        const resp = await fetch("http://127.0.0.1:5001/predict", {
+        const resp = await fetch("http://127.0.0.1:5000/predict", {
           method: "POST",
 
           headers: {
@@ -50,6 +55,18 @@ const Set = () => {
         })
         const data = await resp.json();
 
+        setWorkoutLogs((prevItems) => [
+          ...prevItems,
+          {
+            set:0,
+            exercise: data.workout, // Assuming data.workout is already a string
+            reps: data.total_reps, // Assuming data.total_reps is already a number
+            weight: data.total_weight, // Assuming data.total_weight is already a number
+            notes: '', // Default empty string for notes
+          },
+        ]);
+        
+
         setResponse(data);
 
         setIsPredicting(false);
@@ -58,16 +75,10 @@ const Set = () => {
         setIsError(true)
       }
 
-
-
-
     }
 
     getPrediction()
-
-
-
-  }, [])
+  }, [recordingLogs])
 
 
   return (
@@ -84,7 +95,7 @@ const Set = () => {
 
             {!isPredicting && !isError &&
               <SetOverview exercise={response.workout} reps={response.total_reps} weight={response.total_weight} />
-                
+
             }
 
             {isPredicting && <p className='text-center'>Hold tight , we are generating results....</p>}
