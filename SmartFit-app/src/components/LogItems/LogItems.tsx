@@ -41,7 +41,7 @@ function LogItems({ workoutData }: LogItemsProps) {
             {workoutData.map((item, index) => (
               <div key={index} className={styles.workoutRow}>
                 <span className={`${styles.column} ${styles.exercise}`}>
-                  <button className={styles.exerciseButton}>{item.exercise}</button>
+                  <button className={styles.exerciseButton}>{item.exercise?.split("-")[0]}</button>
                 </span>
                 <span className={`${styles.column} ${styles.set}`}>{item.set}</span>
                 <span className={`${styles.column} ${styles.reps}`}>{item.reps} reps</span>
