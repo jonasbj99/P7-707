@@ -36,7 +36,7 @@ class_names_to_workout = {
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
-
+'''
 def process_weight_prediction(base_64_image_string):
 
     # Step 1: Extract the base64 string (remove the prefix part)
@@ -75,6 +75,7 @@ def process_weight_prediction(base_64_image_string):
     }
 
     return detection_data
+'''
 
 def process_weights(data):
     # Step 1: Initialize a set to store unique weights
