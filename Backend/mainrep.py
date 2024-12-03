@@ -10,9 +10,9 @@ import json
 import supervision as sv
 from concurrent.futures import ThreadPoolExecutor
 import requests
-from repcounter import ExerciseRepetitionCounter
+from repcounter import ExerciseRepCounter
 
-repcounter = ExerciseRepetitionCounter()
+repcounter = ExerciseRepCounter()
 
 # Load the trained models
 model = tf.keras.models.load_model('model/exercise30n+.keras')
@@ -26,7 +26,7 @@ class_names_to_weight = {
 }
 
 class_names_to_workout = {
-    0:"unknown",
+    0:"nothing",
     1:"deadlift-s",
     2:"deadlift-c",
     3:"squat-s",
@@ -181,7 +181,7 @@ def predict():
         print('Exercise: {}, Total Reps: {}, Deadlift Reps {}, Squat Reps: {}'.format(exerciseDone, total_reps, deadlift_reps, squat_reps))
 
         response = {
-            "total_weight": 0,
+            "total_weight": (process_weights(weight_prediction_results))[-1],
             "total_reps": total_reps,
             "workout": exerciseDone,
             "prediction":workout_prediction_results,

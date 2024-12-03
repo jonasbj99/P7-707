@@ -1,4 +1,4 @@
-class ExerciseRepetitionCounter:
+class ExerciseRepCounter:
     def __init__(self):
         # Initialize counters and state trackers for each exercise
         self.reset()  # Automatically reset when the object is created
@@ -16,8 +16,8 @@ class ExerciseRepetitionCounter:
         """
         Processes a single input of exercise state (e.g., 'squat-s', 'deadlift-c').
         """
-        if exercise_input == 'unknown':
-            return  # Skip processing for 'unknown'
+        if exercise_input == 'nothing':
+            return  # Skip processing for 'nothing'
 
         # Parse the input to extract exercise and state
         try:
