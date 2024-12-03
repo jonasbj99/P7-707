@@ -1,4 +1,0 @@
-Future work:
-	-	Check predictions at angles.
-	-	Consider the effect of removing keypoints from pose detection and therefore using fewer keypoints when creating the model.
-	-	Change 'nothing' to 'unknown'

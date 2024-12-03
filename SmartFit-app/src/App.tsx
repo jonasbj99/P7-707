@@ -9,14 +9,16 @@ import Login from './pages/Login/Login';
 import Set from './pages/Set/Set';
 import WorkoutOverview from './pages/WorkoutOverview/WorkoutOverview';
 import Logs from './pages/Logs/Logs';
+import { WorkoutLogs } from './atom/workouts';
+
+import { useAtomValue } from 'jotai';
 
 function App() {
   // Define workout data here
-  const workoutData = [
-    { exercise: "Squat", set: 1, reps: 10, weight: "40kg", notes: "" },
-    { exercise: "Squat", set: 1, reps: 8, weight: "50kg", notes: "" },
-    { exercise: "Deadlift", set: 1, reps: 10, weight: "60kg", notes: "Do more stretching" },
-  ];
+  const workoutData_ = useAtomValue(WorkoutLogs);
+
+  const workoutData = workoutData_.length > 0 ? [workoutData_[workoutData_.length - 1]] : [];
+
 
   return (
     <Router>

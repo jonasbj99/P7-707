@@ -15,7 +15,7 @@ export default function SetOverview(props: SetOverviewProps) {
     <div className={styles.SetOverview}>
       <div className={styles.SetOverview_item}>
         <span className={styles.SetOverview_label}>Exercise</span>
-        <span className={styles.SetOverview_value}>{exercise}</span>
+        <span className={styles.SetOverview_value}>{exercise?.split("-")[0]}</span>
       </div>
       <div className={styles.SetOverview_item}>
         <span className={styles.SetOverview_labelReps}>Reps</span>
