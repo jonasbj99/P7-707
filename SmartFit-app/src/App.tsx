@@ -17,7 +17,7 @@ function App() {
   // Define workout data here
   const workoutData_ = useAtomValue(WorkoutLogs);
 
-  const workoutData = workoutData_.length > 0 ? [workoutData_[workoutData_.length - 1]] : [];
+  const workoutData = workoutData_;
 
 
   return (

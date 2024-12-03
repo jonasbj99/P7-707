@@ -28,6 +28,7 @@ const Set = () => {
 
   const [responseFetched,setResponseFetched] = useState(false);
 
+  const [ifIsAlreadyFetched,setIsAlreadyFetched] = useState(false);
 
   const handleStartRecordingClick = () => {
     navigate('/recording');
@@ -66,6 +67,7 @@ const Set = () => {
           },
         ]);
         
+        setIsAlreadyFetched(true);
 
         setResponse(data);
 
@@ -76,9 +78,11 @@ const Set = () => {
       }
 
     }
-
-    getPrediction()
-  }, [recordingLogs])
+    if(!ifIsAlreadyFetched){
+      getPrediction()
+    }
+    
+  }, [recordingLogs,ifIsAlreadyFetched])
 
 
   return (

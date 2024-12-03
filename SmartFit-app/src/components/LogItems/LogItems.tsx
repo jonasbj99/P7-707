@@ -43,7 +43,7 @@ function LogItems({ workoutData }: LogItemsProps) {
                 <span className={`${styles.column} ${styles.exercise}`}>
                   <button className={styles.exerciseButton}>{item.exercise?.split("-")[0]}</button>
                 </span>
-                <span className={`${styles.column} ${styles.set}`}>{item.set}</span>
+                <span className={`${styles.column} ${styles.set}`}>{index+1}</span>
                 <span className={`${styles.column} ${styles.reps}`}>{item.reps} reps</span>
                 <span className={`${styles.column} ${styles.weight}`}>{item.weight}</span>
                 <span className={`${styles.column} ${styles.notes}`}>{item.notes || ""}</span>
@@ -62,7 +62,7 @@ function LogItems({ workoutData }: LogItemsProps) {
               <div className={styles.workoutContent}>
                 <div className={styles.workoutColumn}>
                   <span className={styles.label}>Set</span>
-                  <span className={styles.value}>{item.set}</span>
+                  <span className={styles.value}>{index+1}</span>
                 </div>
                 <div className={styles.workoutColumn}>
                   <span className={styles.label}>Reps</span>

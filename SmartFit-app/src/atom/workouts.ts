@@ -11,3 +11,4 @@ interface WorkoutItem {
 
 
 export const WorkoutLogs = atomWithStorage<WorkoutItem[]>('workoutlogs',[]);
+export const SingleWorkoutLogs = atom<WorkoutItem>({exercise: '', set:0, reps:0, weight:'', notes: ''});
