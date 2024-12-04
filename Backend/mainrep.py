@@ -182,6 +182,7 @@ def predict():
 
         response = {
             # "total_weight": (process_weights(weight_prediction_results))[-1],
+            "total_weight": 0,
             "total_reps": total_reps,
             "workout": exerciseDone,
             "prediction":workout_prediction_results,
