@@ -23,6 +23,9 @@ function PoseDetection({ setLandmarkLogs, firstFrame, setFirstFrame }: PoseDetec
   const [recordingStartTime] = useState(() => Date.now());
 
   useEffect(() => {
+  setRecordingLogs({mediapipeLogs :[], frames: [] }); 
+  },[])
+  useEffect(() => {
     let isMounted = true;
 
     const pose = new mpPose.Pose({

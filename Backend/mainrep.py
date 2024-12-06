@@ -181,7 +181,8 @@ def predict():
         print('Exercise: {}, Total Reps: {}, Deadlift Reps {}, Squat Reps: {}'.format(exerciseDone, total_reps, deadlift_reps, squat_reps))
 
         response = {
-            "total_weight": (process_weights(weight_prediction_results))[-1],
+            # "total_weight": (process_weights(weight_prediction_results))[-1],
+            "total_weight": 0,
             "total_reps": total_reps,
             "workout": exerciseDone,
             "prediction":workout_prediction_results,
